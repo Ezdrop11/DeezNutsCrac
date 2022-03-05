@@ -1,0 +1,192 @@
+local Loading = Instance.new("ScreenGui")
+local Background = Instance.new("Frame")
+local Bar = Instance.new("Frame")
+local Filler = Instance.new("Frame")
+local Percent = Instance.new("TextLabel")
+local UICorner = Instance.new("UICorner")
+local Title = Instance.new("TextLabel")
+local Shadow = Instance.new("TextLabel")
+local UICorner_2 = Instance.new("UICorner")
+local TextLabel = Instance.new("TextLabel")
+local Fade = Instance.new("Frame")
+local UICorner_3 = Instance.new("UICorner")
+
+Loading.Name = "Loading"
+Loading.Parent = game.CoreGui
+
+Background.Name = "Background"
+Background.Parent = Loading
+Background.BackgroundColor3 = Color3.fromRGB(29, 29, 29)
+Background.Position = UDim2.new(0.33710587, 0, 0.352791876, 0)
+Background.Size = UDim2.new(0.367825389, 0, 0.338409483, 0)
+Background.ZIndex = -2
+
+Bar.Name = "Bar"
+Bar.Parent = Background
+Bar.BackgroundColor3 = Color3.fromRGB(115, 115, 115)
+Bar.BorderColor3 = Color3.fromRGB(0, 102, 153)
+Bar.BorderSizePixel = 2
+Bar.Position = UDim2.new(0.264727831, 0, 0.723679245, 0)
+Bar.Size = UDim2.new(0.469127595, 0, 0.0783352405, 0)
+
+Filler.Name = "Filler"
+Filler.Parent = Bar
+Filler.BackgroundColor3 = Color3.fromRGB(34, 34, 34)
+Filler.BorderColor3 = Color3.fromRGB(34, 34, 34)
+Filler.Size = UDim2.new(0, 0, 1, 0)
+
+Percent.Name = "Percent"
+Percent.Parent = Bar
+Percent.BackgroundColor3 = Color3.fromRGB(255, 255, 255)
+Percent.BackgroundTransparency = 1.000
+Percent.Size = UDim2.new(1, 0, 1, 0)
+Percent.Font = Enum.Font.SourceSansBold
+Percent.Text = "0%"
+Percent.TextColor3 = Color3.fromRGB(255, 255, 255)
+Percent.TextScaled = true
+Percent.TextSize = 14.000
+Percent.TextStrokeTransparency = 0.600
+Percent.TextWrapped = true
+
+UICorner.Parent = Bar
+
+Title.Name = "Title"
+Title.Parent = Background
+Title.BackgroundColor3 = Color3.fromRGB(255, 255, 255)
+Title.BackgroundTransparency = 1.000
+Title.BorderSizePixel = 0
+Title.Position = UDim2.new(0.252016395, 0, 0.131864667, 0)
+Title.Size = UDim2.new(0.481730044, 0, 0.27822122, 0)
+Title.Font = Enum.Font.GothamBold
+Title.Text = "dhbal"
+Title.TextColor3 = Color3.fromRGB(255, 255, 255)
+Title.TextScaled = true
+Title.TextSize = 14.000
+Title.TextStrokeTransparency = 0.600
+Title.TextWrapped = true
+
+Shadow.Name = "Shadow"
+Shadow.Parent = Title
+Shadow.BackgroundColor3 = Color3.fromRGB(255, 255, 255)
+Shadow.BackgroundTransparency = 1.000
+Shadow.Position = UDim2.new(0, 3, 0, 3)
+Shadow.Size = UDim2.new(1, 0, 1, 0)
+Shadow.ZIndex = -1
+Shadow.Font = Enum.Font.GothamBold
+Shadow.Text = "dhbal"
+Shadow.TextColor3 = Color3.fromRGB(86, 86, 86)
+Shadow.TextScaled = true
+Shadow.TextSize = 14.000
+Shadow.TextWrapped = true
+
+UICorner_2.Parent = Background
+
+TextLabel.Parent = Background
+TextLabel.BackgroundColor3 = Color3.fromRGB(255, 255, 255)
+TextLabel.BackgroundTransparency = 1.000
+TextLabel.BorderSizePixel = 0
+TextLabel.Position = UDim2.new(0.280219793, 0, 0.420560747, 0)
+TextLabel.Size = UDim2.new(0, 200, 0, 50)
+TextLabel.Font = Enum.Font.SourceSans
+TextLabel.Text = ""
+TextLabel.TextColor3 = Color3.fromRGB(255, 255, 255)
+TextLabel.TextSize = 18.000
+
+Fade.Name = "Fade"
+Fade.Parent = Loading
+Fade.BackgroundColor3 = Color3.fromRGB(29, 29, 29)
+Fade.BackgroundTransparency = 1.000
+Fade.BorderSizePixel = 0
+Fade.Position = UDim2.new(0.33710587, 0, 0.352791905, 0)
+Fade.Size = UDim2.new(0.368000001, 0, 0.338, 0)
+
+UICorner_3.Parent = Fade
+
+-- Scripts:
+
+local function GUTZBDA_fake_script() -- Loading.Client 
+	local script = Instance.new('LocalScript', Loading)
+
+	local gui = script.Parent
+	local background = gui:WaitForChild("Background")
+	local bar = background:WaitForChild("Bar")
+	local filler = bar:WaitForChild("Filler")
+	local percentage = bar:WaitForChild("Percent")
+	
+	wait(2)
+	
+	for i = 0, 100 do
+		wait(0.05)
+		percentage.Text = i.."%"
+	
+		local formula = i/100
+	
+		filler:TweenSize(UDim2.new(formula, 0, 1, 0), Enum.EasingDirection.Out, Enum.EasingStyle.Linear, 0.1, true)
+		
+		if i == 0 then
+			TextLabel.Text = "[ 1/3 ] Processing Execution..."
+		end
+		if i == 50 then
+			TextLabel.Text = "[ 2/3 ] Getting Ready..."
+		end
+		if i == 99 then
+			TextLabel.Text = "[ 3/3 ] Ready!"
+		end
+	end 
+	
+	local tween = game.TweenService:Create(gui.Fade, TweenInfo.new(1.5, Enum.EasingStyle.Linear, Enum.EasingDirection.Out), {["BackgroundTransparency"] = 0})
+	tween:Play()
+	tween.Completed:wait()
+	
+	gui.Background.Visible = false
+	wait(0.4)
+	
+	tween = game.TweenService:Create(gui.Fade, TweenInfo.new(1.5, Enum.EasingStyle.Linear, Enum.EasingDirection.Out), {["BackgroundTransparency"] = 1})
+	tween:Play()
+	tween.Completed:wait()
+	
+	game.StarterGui:SetCoreGuiEnabled(Enum.CoreGuiType.All, true)
+	
+	wait(0.4)
+	gui:Destroy()
+end
+coroutine.wrap(GUTZBDA_fake_script)()
+
+local Drag = Background
+gsCoreGui = game:GetService("CoreGui")
+gsTween = game:GetService("TweenService")
+local UserInputService = game:GetService("UserInputService")
+local dragging
+local dragInput
+local dragStart
+local startPos
+local function update(input)
+	local delta = input.Position - dragStart
+	local dragTime = 0.090
+	local SmoothDrag = {}
+	SmoothDrag.Position = UDim2.new(startPos.X.Scale, startPos.X.Offset + delta.X, startPos.Y.Scale, startPos.Y.Offset + delta.Y)
+	local dragSmoothFunction = gsTween:Create(Drag, TweenInfo.new(dragTime, Enum.EasingStyle.Sine, Enum.EasingDirection.InOut), SmoothDrag)
+	dragSmoothFunction:Play()
+end
+Drag.InputBegan:Connect(function(input)
+	if input.UserInputType == Enum.UserInputType.MouseButton1 or input.UserInputType == Enum.UserInputType.Touch then
+		dragging = true
+		dragStart = input.Position
+		startPos = Drag.Position
+		input.Changed:Connect(function()
+			if input.UserInputState == Enum.UserInputState.End then
+				dragging = false
+			end
+		end)
+	end
+end)
+Drag.InputChanged:Connect(function(input)
+	if input.UserInputType == Enum.UserInputType.MouseMovement or input.UserInputType == Enum.UserInputType.Touch then
+		dragInput = input
+	end
+end)
+UserInputService.InputChanged:Connect(function(input)
+	if input == dragInput and dragging and Drag.Size then
+		update(input)
+	end
+end)
